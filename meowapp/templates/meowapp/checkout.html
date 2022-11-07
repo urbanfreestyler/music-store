@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Add meta tags for mobile and IE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>m e o w | Checkout </title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="{% static 'meowapp\css\style.css' %}">
+        <link rel="stylesheet" href="{% static 'meowapp\css\bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'meowapp\css\fontAwesome.css' %}">
+        <link rel="stylesheet" href="{% static 'meowapp\css\hero-slider.css' %}">
+        <link rel="stylesheet" href="{% static 'meowapp\css\templatemo-main.css' %}">
+        <link rel="stylesheet" href="{% static 'meowapp\css\owl-carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'meowapp\css\musicplayer.css' %}">
+        <script src="https://kit.fontawesome.com/bf7f7bdd1f.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Allerta' rel='stylesheet'>
+        <link rel="stylesheet" href="{% static 'meowapp/css/musicplayer.css' %}">
+        <script src="../../static/meowapp/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+
+        <style>
+            body{
+                font-family: 'Gloria Hallelujah', cursive;
+            }
+            p{
+                font-size: 25px;
+            }
+            td, th{
+                font-size: 18px;
+            }
+        </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row">
+                <div class="col-lg-6">
+                    <br>
+                    <div class="card card-body">
+                        <h4>{{ beat.title }}</h4>
+                        <hr>
+                        <h6>
+                            Tempo: {{ beat.tempo }}
+                        </h6>
+                        <hr>
+                        <h6>
+                            Key: {{ beat.key }}
+                        </h6>
+                        <hr>
+                        <h6>
+                            Duration: {{ beat.length }}
+                        </h6>
+                        <hr>
+                        <h1>Price: $ {{ beat.price }}</h1>
+                        <hr>
+
+                        <div id="smart-button-container">
+                            <div style="text-align: center;">
+                                <div id="paypal-button-container"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>  
+        </div>
+    </div>
+    
+
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+
+    <script>
+        var total = '{{ beat.price }}'
+
+        {% comment %} var id = location.pathname.split('/')[2]
+
+        var delivery = 'delivery/'
+
+        var url = delivery.concat(id) {% endcomment %}
+        
+        var beatId = '{{ beat.id }}'
+
+        function initPayPalButton() {
+        paypal.Buttons({
+            style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'paypal',
+            
+            },
+
+            
+
+            createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{"amount":{"currency_code":"USD","value":total}}]
+            });
+            },
+
+            onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                window.location.href = "{% url 'delivery' id=12345 %}".replace(/12345/, beatId.toString());
+                //alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            });
+            },
+
+            onError: function(err) {
+            console.log(err);
+            }
+        }).render('#paypal-button-container');
+        }
+        initPayPalButton();
+    </script>
+
+</body>
+
+</html>

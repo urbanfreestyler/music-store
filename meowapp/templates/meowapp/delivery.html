@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Add meta tags for mobile and IE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title> m e o w| Delivery </title>
+
+    <link rel="stylesheet" href="{% static 'meowapp\css\style.css' %}">
+    <link rel="stylesheet" href="{% static 'meowapp\css\bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'meowapp\css\fontAwesome.css' %}">
+    <link rel="stylesheet" href="{% static 'meowapp\css\hero-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'meowapp\css\templatemo-main.css' %}">
+    <link rel="stylesheet" href="{% static 'meowapp\css\owl-carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'meowapp\css\musicplayer.css' %}">
+    <script src="https://kit.fontawesome.com/bf7f7bdd1f.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Allerta' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'meowapp/css/musicplayer.css' %}">
+    <script src="../../static/meowapp/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <style>
+        body{
+            font-family: 'Gloria Hallelujah', cursive;
+        }
+        p{
+            font-size: 25px;
+        }
+        td, th{
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row">
+                <div class="col-lg-6">
+                    <br>
+                    <div class="card card-body">
+                        <h4>{{ beat.title }}</h4>
+                        <hr>
+                        <h6>
+                            Tempo: {{ beat.tempo }}
+                        </h6>
+                        <hr>
+                        <h6>
+                            Key: {{ beat.key }}
+                        </h6>
+                        <hr>
+                        <h6>
+                            Duration: {{ beat.duration }}
+                        </h6>
+
+
+                    
+                        <form action="{% url 'send_mail' beat.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h2> The .wav file will be sent to your email. Make sure you entered the valid email address.</h2> 
+                            <fieldset class="p-3">
+                                <input type="email" name="to_email" class="form-control" id="email" placeholder="Your email..." required=''>
+                            </fieldset>
+
+                            <fieldset class="p-3">
+                                <button type="submit" id="form-submit" class="btn btn-lg btn-primary">Submit</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
